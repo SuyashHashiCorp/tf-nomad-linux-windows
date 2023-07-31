@@ -117,7 +117,7 @@ Start-Service -Name "Nomad"
 </powershell>
 EOL
   tags = {
-    Name = "Nomad-Win"
+    Name = "Nomad-Windows-Client"
   }
   connection {
     host = self.public_ip
