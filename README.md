@@ -36,7 +36,7 @@
 To provision the cluster, execute the following commands.
 
 ```shell
-git clone https://github.com/SuyashHashiCorp/terraform-k8s.git
+git clone https://github.com/SuyashHashiCorp/tf-nomad-linux-windows.git
 cd terraform-k8s
 terraform init
 terraform plan
