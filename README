@@ -1,27 +1,57 @@
-This code will only work on Mac OS with M1 Chip.
+# tf-nomad-linux-windows
 
-1. Please make sure your aws cli has been installed on your mac os and credentials are store at path "~/.aws/credentials"
+# Terraform Code and Scripts to Automate Nomad Setup using Linux and Windows Client Nodes via Terraform (Compatible for Mac with M1 Chip)
 
-2. Before Run this terraform code, please change below parameters in "variable.tf" file as per your AWS environment.
+## Prerequisites
 
-* Update "key_pair" variable block with your "key_name" and "public_key".
+1. AWS Account.
+2. 3 EC2 Instances With the below Specification - 
+ A. For Linux Machine - 
+   a. Instance Type = "t2.medium"
+   b. AMI = "ami-04505e74c0741db8d"
 
-* Update "key_path" variable block - Here, please mention the path and file name of the .pem file which you will use to SSH into ec2 instances. 
+ B. For Windows Server 2019 Machine -
+   a. Instance Type = "t2.medium"
+   b. AMI = "ami-00cd301dd78676b2d"
 
-* Update "subnet" variable block - Please make sure, use default public subnet which have internet accessibility. If you are using any custom subnet then you need to change the value of IPs for all instances. 
+3. Public Subnet with CIDR - 172.31.0.0/16 (This is being used for private IPs allocation as per point-4 and POD CIDR Range in Nomad Cluster).
 
-* update "sg_id" variable block - Make sure this security group should have Nomad port - 4646, Consul Port - 8500, SSH Port - 22, RDP Port - 3389, WinRMP(HTTP) Port - 5985 and ICMP(Ping) from all ports are enabled within the cidr_range for the subnet.
+4. Private IPs will be assigned as below - 
 
-3. Go to ec2.tf file and update the value of "source" parameter of "provisioner "file" {}" block - 
+![alt text](file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2011.49.36%20AM.png)
 
-* Please update this value with the exact path where you will copy/dpwnload this terraform project.
-In my case this was - "/Users/suyash/Projects/70567_Nomad_Windows/scripts/"
+Nomad-Linux-Server - 172.31.84.119
+Nomad-Linux-Client - 172.31.84.120
+Nomad-Windows-Client - 172.31.84.113
 
-* Update the value of "password" parameter by which you will be login into Windows system.
-In my case, I am using my pem file and decrypt it and using as my password. Below is the sample example.
+5. Security Group Settings - Please create or update your security group as per the below table -
 
-password = "${rsadecrypt(self.password_data, file("/Users/suyash/Projects/AWS-Keys/70567-key.pem"))}"
+![alt text](file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2012.12.22%20PM.png)
 
-Please update the file path with name in above format as per your environment.
+6. Update the values as per the below table -
 
-Thanks.
+![alt text](file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2012.40.29%20PM.png)
+
+## Usage/Examples
+
+To provision the cluster, execute the following commands.
+
+```shell
+git clone https://github.com/SuyashHashiCorp/terraform-k8s.git
+cd terraform-k8s
+terraform init
+terraform plan
+terraform apply
+```
+
+## To destroy the cluster, 
+
+```shell
+terraform destroy -auto-approve
+```
+
+## To restart the cluster,
+
+```shell
+terraform apply -auto-approve
+```
