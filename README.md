@@ -18,7 +18,7 @@
 
 4. Private IPs will be assigned as below - 
 
-![alt text](file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2011.49.36%20AM.png)
+![alt text] (file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2011.49.36%20AM.png)
 
 Nomad-Linux-Server - 172.31.84.119
 Nomad-Linux-Client - 172.31.84.120
@@ -26,11 +26,11 @@ Nomad-Windows-Client - 172.31.84.113
 
 5. Security Group Settings - Please create or update your security group as per the below table -
 
-![alt text](file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2012.12.22%20PM.png)
+![alt text] (file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2012.12.22%20PM.png)
 
 6. Update the values as per the below table -
 
-![alt text](file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2012.40.29%20PM.png)
+![alt text] (file:///Users/suyash/Desktop/Screenshot%202023-07-31%20at%2012.40.29%20PM.png)
 
 ## Usage/Examples
 
