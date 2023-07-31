@@ -1,0 +1,27 @@
+This code will only work on Mac OS with M1 Chip.
+
+1. Please make sure your aws cli has been installed on your mac os and credentials are store at path "~/.aws/credentials"
+
+2. Before Run this terraform code, please change below parameters in "variable.tf" file as per your AWS environment.
+
+* Update "key_pair" variable block with your "key_name" and "public_key".
+
+* Update "key_path" variable block - Here, please mention the path and file name of the .pem file which you will use to SSH into ec2 instances. 
+
+* Update "subnet" variable block - Please make sure, use default public subnet which have internet accessibility. If you are using any custom subnet then you need to change the value of IPs for all instances. 
+
+* update "sg_id" variable block - Make sure this security group should have Nomad port - 4646, Consul Port - 8500, SSH Port - 22, RDP Port - 3389, WinRMP(HTTP) Port - 5985 and ICMP(Ping) from all ports are enabled within the cidr_range for the subnet.
+
+3. Go to ec2.tf file and update the value of "source" parameter of "provisioner "file" {}" block - 
+
+* Please update this value with the exact path where you will copy/dpwnload this terraform project.
+In my case this was - "/Users/suyash/Projects/70567_Nomad_Windows/scripts/"
+
+* Update the value of "password" parameter by which you will be login into Windows system.
+In my case, I am using my pem file and decrypt it and using as my password. Below is the sample example.
+
+password = "${rsadecrypt(self.password_data, file("/Users/suyash/Projects/AWS-Keys/70567-key.pem"))}"
+
+Please update the file path with name in above format as per your environment.
+
+Thanks.
